@@ -22,7 +22,8 @@ public class OrderDAO implements Dao<Order> {
 		Long order_id = resultSet.getLong("order_id");
 		Long fk_item_id = resultSet.getLong("fk_item_id");
 		Long fk_customer_id = resultSet.getLong("fk_customer_id");
-		Double unit_price = resultSet.getDouble("unit_price");
+		Long fk_order_id = resultSet.getLong("fk_order_id");
+	//	Double unit_price = resultSet.getDouble("unit_price");
 		int quantity = resultSet.getInt("quantity");
 		return null;
 
@@ -32,7 +33,8 @@ public class OrderDAO implements Dao<Order> {
 	public List<Order> readAll() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("select * from orders JOIN order_items" + "ON orders.order_id = order_items.fk_order_id");) {
+				ResultSet resultSet = statement.executeQuery("select * from orders JOIN order_items "
+						+ "ON orders.order_id = order_items.fk_order_id");) {
 			List<Order> orders = new ArrayList<>();
 			while (resultSet.next()) {
 				orders.add(modelFromResultSet(resultSet));
@@ -60,15 +62,15 @@ public class OrderDAO implements Dao<Order> {
 	}
 
 	@Override
-	public Order create(Order orders) {
+	public Order create(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-				statement.executeUpdate("INSERT INTO order_items(unit_price, quantity) values('" + order.unit_price()
-						+ "','" + customer.getSurname() + "')");
+				statement.executeUpdate("INSERT INTO order_items( quantity, fk_order_id) values('" + order.getQuantity() + "','" + order.getFk_order_id() + "')");
 				return readLatest();
 			} catch (Exception e) {
 				LOGGER.debug(e);
 				LOGGER.error(e.getMessage());
+			}
 				return null;
 	}
 
