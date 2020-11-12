@@ -19,9 +19,9 @@ public class ItemDAO implements Dao<Item>{
 	@Override
 	public Item modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long item_id = resultSet.getLong("item_id");
-		String itemName = resultSet.getString("itemName");
+		String item_name = resultSet.getString("item_name");
 		Double price = resultSet.getDouble("price");
-		return new Item(item_id, itemName, price);
+		return new Item(item_id, item_name, price);
 	}
 
 	/**
@@ -49,7 +49,7 @@ public class ItemDAO implements Dao<Item>{
 	public Item readLatest() {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();
-				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY id DESC LIMIT 1");) {
+				ResultSet resultSet = statement.executeQuery("SELECT * FROM items ORDER BY item_id DESC LIMIT 1");) {
 			resultSet.next();
 			return modelFromResultSet(resultSet);
 		} catch (Exception e) {
@@ -68,7 +68,7 @@ public class ItemDAO implements Dao<Item>{
 	public Item create(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("INSERT INTO items(item_name, price) values('" + item.getItemName()
+			statement.executeUpdate("INSERT INTO items(item_name, price) values('" + item.getItem_name()
 					+ "','" + item.getPrice() + "')");
 			return readLatest();
 		} catch (Exception e) {
@@ -102,7 +102,7 @@ public class ItemDAO implements Dao<Item>{
 	public Item update(Item item) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-			statement.executeUpdate("update items set item_name ='" + item.getItemName() + "', price ='"
+			statement.executeUpdate("update items set item_name ='" + item.getItem_name() + "', price ='"
 					+ item.getPrice() + "' where item_id =" + item.getItem_id());
 			return readItem(item.getItem_id());
 		} catch (Exception e) {

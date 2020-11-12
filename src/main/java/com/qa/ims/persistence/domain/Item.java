@@ -3,17 +3,17 @@ package com.qa.ims.persistence.domain;
 public class Item {
 
 	private Long item_id;
-	private String itemName;
+	private String item_name;
 	private Double price;
 
-	public Item(String itemName, Double price) {
-		this.itemName = itemName;
+	public Item(String item_name, Double price) {
+		this.item_name = item_name;
 		this.price = price;
 	}
 
-	public Item(Long item_id, String itemName, Double price) {
+	public Item(Long item_id, String item_name, Double price) {
 		this.item_id = item_id;
-		this.itemName = itemName;
+		this.item_name = item_name;
 		this.price = price;
 	}
 
@@ -25,12 +25,12 @@ public class Item {
 		this.item_id = item_id;
 	}
 
-	public String getItemName() {
-		return itemName;
+	public String getItem_name() {
+		return item_name;
 	}
 
-	public void setItemName(String itemName) {
-		this.itemName = itemName;
+	public void setItem_name(String item_name) {
+		this.item_name = item_name;
 	}
 
 	public Double getPrice() {
@@ -43,7 +43,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Order ID: " + item_id + "Item Name: " + itemName + "Price: " + price;
+		return "Order ID: " + item_id + "Item Name: " + item_name + "Price: " + price;
 	}
 
 	@Override
@@ -55,10 +55,10 @@ public class Item {
 		if (getClass() != obj.getClass())
 			return false;
 		Item other = (Item) obj;
-		if (itemName == null) {
-			if (other.itemName != null)
+		if (item_name == null) {
+			if (other.item_name != null)
 				return false;
-		} else if (!itemName.equals(other.itemName))
+		} else if (!item_name.equals(other.item_name))
 			return false;
 		if (item_id == null) {
 			if (other.item_id != null)

@@ -4,7 +4,6 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import com.qa.ims.utils.Utils;
 import com.qa.ims.persistence.dao.ItemDAO;
-import com.qa.ims.persistence.domain.Customer;
 import com.qa.ims.persistence.domain.Item;
 
 
@@ -33,11 +32,11 @@ public ItemController (ItemDAO itemDAO, Utils utils) {
 	@Override
 	public Item create() {
 		LOGGER.info("Please enter Item Name");
-		String itemName = utils.getString();
+		String item_name = utils.getString();
 		LOGGER.info("Please enter the price of the Item");
 		Double price = utils.getDouble();
-		Item item = itemDAO.create(new Item(itemName, price));
-		LOGGER.info("Customer created");
+		Item item = itemDAO.create(new Item(item_name, price));
+		LOGGER.info("Item created");
 		return item;
 		
 	}
@@ -50,10 +49,10 @@ public ItemController (ItemDAO itemDAO, Utils utils) {
 		LOGGER.info("Please enter the id of the item you would like to update");
 		Long item_id = utils.getLong();
 		LOGGER.info("Please enter the item name");
-		String itemName = utils.getString();
+		String item_name = utils.getString();
 		LOGGER.info("Please enter a price");
 		Double price = utils.getDouble();
-		Item item = itemDAO.update(new Item(item_id, itemName, price));
+		Item item = itemDAO.update(new Item(item_id, item_name, price));
 		LOGGER.info("Item Updated");
 		return item;
 	}
