@@ -10,18 +10,17 @@ CREATE TABLE IF NOT EXISTS `ims`.`customers` (
 
 CREATE TABLE IF NOT EXISTS `ims` .`items` (
 	`item_id` INT(11) UNIQUE NOT NULL AUTO_INCREMENT,
-`item_name` VARCHAR(40) NULL DEFAULT NULL,
+	`item_name` VARCHAR(40) NULL DEFAULT NULL,
 	`price` DOUBLE NULL DEFAULT NULL
 	PRIMARY KEY (`item_id`)
 );
 
 CREATE TABLE IF NOT EXISTS `ims` .` orders`(
 	`order_id` INT(11) UNIQUE NOT NULL AUTO_INCREMENT,
-	`fk_item_id` INT(11)  NOT NULL,
 	`fk_customer_id` INT(11) NOT NULL,
 	PRIMARY KEY (`order_id`),
-	FOREIGN KEY (`fk_customer_id`) REFERENCES `customers`(`customer_id`),
-	FOREIGN KEY (`fk_item_id`) REFERENCES `items`(`item_id`)
+	FOREIGN KEY (`fk_customer_id`) REFERENCES `customers`(`customer_id`)
+	
 
 );
 
