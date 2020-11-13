@@ -19,14 +19,14 @@ CREATE TABLE IF NOT EXISTS `ims` .` orders`(
 	`order_id` INT(11) UNIQUE NOT NULL AUTO_INCREMENT,
 	`fk_customer_id` INT(11) NOT NULL,
 	PRIMARY KEY (`order_id`),
-	FOREIGN KEY (`fk_customer_id`) REFERENCES `customers`(`customer_id`)
+	FOREIGN KEY (`fk_customer_id`) REFERENCES `customers`(`id`)
 	
 
 );
 
 CREATE TABLE IF NOT EXISTS `ims` .`order_items`(
 	`order_items_id` INT(11) UNIQUE NOT NULL AUTO_INCREMENT,
-	`unit_price` DECIMAL NOT NULL, 
+	`unit_price` DOUBLE NOT NULL, 
 	`quantity` INT NOT NULL,
 	`fk_order_id` INT NOT NULL,
 	`fk_item_id` INT NOT NULL,
