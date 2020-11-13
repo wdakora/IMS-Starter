@@ -20,8 +20,6 @@ CREATE TABLE IF NOT EXISTS `ims` .` orders`(
 	`fk_customer_id` INT(11) NOT NULL,
 	PRIMARY KEY (`order_id`),
 	FOREIGN KEY (`fk_customer_id`) REFERENCES `customers`(`id`)
-	
-
 );
 
 CREATE TABLE IF NOT EXISTS `ims` .`order_items`(
