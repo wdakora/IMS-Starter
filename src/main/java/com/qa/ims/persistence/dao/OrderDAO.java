@@ -20,10 +20,7 @@ public class OrderDAO implements Dao<Order> {
 	@Override
 	public Order modelFromResultSet(ResultSet resultSet) throws SQLException {
 		Long order_id = resultSet.getLong("order_id");
-		Long fk_item_id = resultSet.getLong("fk_item_id");
-		Long fk_customer_id = resultSet.getLong("fk_customer_id");
-		Long fk_order_id = resultSet.getLong("fk_order_id");
-	//	Double unit_price = resultSet.getDouble("unit_price");
+		Double unit_price = resultSet.getDouble("unit_price");
 		int quantity = resultSet.getInt("quantity");
 		return null;
 
@@ -65,7 +62,8 @@ public class OrderDAO implements Dao<Order> {
 	public Order create(Order order) {
 		try (Connection connection = DBUtils.getInstance().getConnection();
 				Statement statement = connection.createStatement();) {
-				statement.executeUpdate("INSERT INTO order_items( quantity, fk_order_id) values('" + order.getQuantity() + "','" + order.getFk_order_id() + "')");
+				statement.executeUpdate("INSERT INTO orders(id) values(" + order.getCustomer().getId()+ ")");
+				statement.executeUpdate("INSERT INTO order_items( unit_price, quantity, fk_order_id, fk_item_id ) values(" + order.getUnit_price() + "','" + order.getQuantity() + "','" + order.getOrder_id() + "','" + order.getItem().getItem_id() +  ")");
 				return readLatest();
 			} catch (Exception e) {
 				LOGGER.debug(e);

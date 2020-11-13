@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import com.qa.ims.persistence.dao.CustomerDAO;
 import com.qa.ims.persistence.dao.OrderDAO;
 import com.qa.ims.persistence.domain.Order;
 import com.qa.ims.utils.Utils;
@@ -34,8 +35,14 @@ public List<Order> readAll(){
 
 @Override
 public Order create() {
-	// TODO Auto-generated method stub
-	return null;
+	LOGGER.info("Please enter your Customer ID");
+	long id = utils.getLong();
+	LOGGER.info("Please enter the item ID");
+	long item_id = utils.getLong();
+	LOGGER.info("Please enter the quantity");
+	int quantity = utils.getInt();
+	Order order = orderDAO.create(new Order(id,item_id,quantity));
+	return order;
 }
 
 @Override
