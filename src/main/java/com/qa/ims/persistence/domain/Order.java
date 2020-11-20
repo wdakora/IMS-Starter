@@ -3,31 +3,109 @@ package com.qa.ims.persistence.domain;
 public class Order {
 
 	private long order_id;
-	private long fk_item_id;
-	private long fk_customer_id;
-	private long fk_order_id;
 	private long order_items_id;
-	private Double unit_price;
+	private Double total_price;
 	private int quantity;
+	private Customer customer;
+//	private Item item;
+	private int item_id;
 	
 	
-	public Order(long order_id, long fk_item_id, long fk_customer_id, long fk_order_id, long order_items_id, Double unit_price, int quantity) {
+//	public Order(Customer customer, long order_id, long order_items_id, Double total_price, int quantity, Item item) {
+	public Order(long order_id, long order_items_id, Double total_price, int quantity) {
 		this.order_id = order_id;
-		this.fk_item_id = fk_item_id;
-		this.fk_customer_id = fk_customer_id;
-		this.fk_order_id = fk_order_id;
 		this.order_items_id = order_items_id;
-		this.unit_price = unit_price;
+		this.total_price = total_price;
+		this.quantity = quantity;
+//		this.customer = customer;
+//		this.item = item;
+	}
+
+	
+
+public Order(long order_items_id, Double total_price, int quantity, long order_id, int item_id) {
+	super();
+	this.order_id = order_id;
+	this.order_items_id = order_items_id;
+	this.total_price = total_price;
+	this.quantity = quantity;
+	this.item_id = item_id;
+}
+
+
+
+//	public Order(Customer customer, long order_items_id, Double total_price, int quantity,  Item item) {
+	public Order(long order_items_id, Double total_price, int quantity) {
+		this.order_items_id = order_items_id;
+		this.total_price = total_price;
+		this.quantity = quantity;
+//		this.customer = customer;
+//		this.item = item;
+	}
+	
+	public Order(long order_id,int item_id, int quantity,Double total_price) {
+		
+		this.order_id = order_id;
+		this.total_price = total_price;
+		this.quantity = quantity;
+		this.item_id = item_id;
+	}
+
+
+	public Order( Customer customer, long order_items_id, Double total_price, int quantity) {
+		
+		this.order_items_id = order_items_id;
+		this.total_price = total_price;
+		this.quantity = quantity;
+		this.customer = customer;
+	}
+	
+	public Order ( int item_id, int quantity) {
+		
+		this.item_id = item_id;
 		this.quantity = quantity;
 	}
 
-	public long getFk_order_id() {
-		return fk_order_id;
+
+	public Order(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Order(long order_id, int item_id, int quantity ) {
+		this.order_id = order_id;
+		this.item_id = item_id;
+		this.quantity = quantity;
 	}
 
-	public void setFk_order_id(long fk_order_id) {
-		this.fk_order_id = fk_order_id;
+
+
+	public int getItem_id() {
+		return item_id;
 	}
+
+
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
+	}
+
+
+//	public Item getItem() {
+//		return item;
+//	}
+//
+//	public void setItem(Item item) {
+//		this.item = item;
+//	}
+//
+	public Customer getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+
 
 	public long getOrder_items_id() {
 		return order_items_id;
@@ -45,28 +123,15 @@ public class Order {
 		this.order_id = order_id;
 	}
 
-	public long getFk_item_id() {
-		return fk_item_id;
+
+	public Double getTotal_price() {
+		
+		return total_price;
 	}
 
-	public void setFk_item_id(long fk_item_id) {
-		this.fk_item_id = fk_item_id;
-	}
+	public void setTotal_price(Double total_price) {
+		this.total_price = total_price;
 
-	public long getFk_customer_id() {
-		return fk_customer_id;
-	}
-
-	public void setFk_customer_id(long fk_customer_id) {
-		this.fk_customer_id = fk_customer_id;
-	}
-
-	public Double getUnit_price() {
-		return unit_price;
-	}
-
-	public void setUnit_price(Double unit_price) {
-		this.unit_price = unit_price;
 	}
 
 	public int getQuantity() {
@@ -76,6 +141,12 @@ public class Order {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	@Override
+	public String toString() {
+		return "Order ID: " + order_id + "  Item id: " + item_id + "  Quantity: " + quantity + "  Total Price for Item: " + total_price;
+	}
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -86,22 +157,23 @@ public class Order {
 		if (getClass() != obj.getClass())
 			return false;
 		Order other = (Order) obj;
-		if (fk_customer_id != other.fk_customer_id)
-			return false;
-		if (fk_item_id != other.fk_item_id)
-			return false;
 		if (order_id != other.order_id)
-			return false;
-		if (fk_order_id != other.fk_order_id)
 			return false;
 		if (order_items_id != other.order_items_id)
 			return false;
+		if (item_id != other.item_id )
+			return false;
 		if (quantity != other.quantity)
 			return false;
-		if (unit_price == null) {
-			if (other.unit_price != null)
+		if (customer != other.customer)
+			return false;
+//		if (item != other.item)
+//			return false;
+		if (total_price == null) {
+		if (other.total_price != null)
 				return false;
-		} else if (!unit_price.equals(other.unit_price))
+		
+		} else if (!total_price.equals(other.total_price))
 			return false;
 		return true;
 	}
