@@ -14,21 +14,24 @@ import com.qa.ims.utils.DBUtils;
 
 public class CustomerDAOTest {
 
-	private final CustomerDAO DAO = new CustomerDAO();
+	private final static CustomerDAO DAO = new CustomerDAO();
 
 	@BeforeClass
 	public static void init() {
-		DBUtils.connect("root", "pass");
+		DBUtils.connect("root", "QATraining2020");
+		
 	}
 
 	@Before
 	public void setup() {
 		DBUtils.getInstance().init("src/test/resources/sql-schema.sql", "src/test/resources/sql-data.sql");
+		final Customer created = new Customer(2L, "chris", "perrins");
+		DAO.create(created);
 	}
 
 	@Test
 	public void testCreate() {
-		final Customer created = new Customer(2L, "chris", "perrins");
+		final Customer created = new Customer(3L, "chris", "perrins");
 		assertEquals(created, DAO.create(created));
 	}
 
@@ -36,12 +39,13 @@ public class CustomerDAOTest {
 	public void testReadAll() {
 		List<Customer> expected = new ArrayList<>();
 		expected.add(new Customer(1L, "jordan", "harrison"));
+		expected.add(new Customer(2L, "chris", "perrins"));
 		assertEquals(expected, DAO.readAll());
 	}
 
 	@Test
 	public void testReadLatest() {
-		assertEquals(new Customer(1L, "jordan", "harrison"), DAO.readLatest());
+		assertEquals(new Customer(2L, "chris", "perrins"), DAO.readLatest());
 	}
 
 	@Test
@@ -52,13 +56,16 @@ public class CustomerDAOTest {
 
 	@Test
 	public void testUpdate() {
-		final Customer updated = new Customer(1L, "chris", "perrins");
+		final Customer updated = new Customer(2L, "chris", "perrins");
 		assertEquals(updated, DAO.update(updated));
 
 	}
 
 	@Test
 	public void testDelete() {
-		assertEquals(1, DAO.delete(1));
+		assertEquals(1, DAO.delete(2));
 	}
+	
+
+	
 }

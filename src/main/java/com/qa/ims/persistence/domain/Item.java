@@ -17,6 +17,7 @@ public class Item {
 		this.price = price;
 	}
 
+
 	public Long getItem_id() {
 		return item_id;
 	}
@@ -34,7 +35,7 @@ public class Item {
 	}
 
 	public Double getPrice() {
-		return price;
+		return this.price;
 	}
 
 	public void setPrice(Double price) {
@@ -43,7 +44,7 @@ public class Item {
 
 	@Override
 	public String toString() {
-		return "Order ID: " + item_id + "Item Name: " + item_name + "Price: " + price;
+		return "Item ID: " + item_id + "Item Name: " + item_name + "Price: " + price;
 	}
 
 	@Override

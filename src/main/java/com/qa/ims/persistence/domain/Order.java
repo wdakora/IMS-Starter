@@ -4,40 +4,99 @@ public class Order {
 
 	private long order_id;
 	private long order_items_id;
-	private Double unit_price;
+	private Double total_price;
 	private int quantity;
 	private Customer customer;
-	private Item item;
+//	private Item item;
+	private int item_id;
 	
 	
-	public Order(long order_id, long order_items_id, Double unit_price, int quantity, Customer customer, Item item) {
+//	public Order(Customer customer, long order_id, long order_items_id, Double total_price, int quantity, Item item) {
+	public Order(long order_id, long order_items_id, Double total_price, int quantity) {
 		this.order_id = order_id;
 		this.order_items_id = order_items_id;
-		this.unit_price = unit_price;
+		this.total_price = total_price;
+		this.quantity = quantity;
+//		this.customer = customer;
+//		this.item = item;
+	}
+
+	
+
+public Order(long order_items_id, Double total_price, int quantity, long order_id, int item_id) {
+	super();
+	this.order_id = order_id;
+	this.order_items_id = order_items_id;
+	this.total_price = total_price;
+	this.quantity = quantity;
+	this.item_id = item_id;
+}
+
+
+
+//	public Order(Customer customer, long order_items_id, Double total_price, int quantity,  Item item) {
+	public Order(long order_items_id, Double total_price, int quantity) {
+		this.order_items_id = order_items_id;
+		this.total_price = total_price;
+		this.quantity = quantity;
+//		this.customer = customer;
+//		this.item = item;
+	}
+	
+	public Order(long order_id,int item_id, int quantity,Double total_price) {
+		
+		this.order_id = order_id;
+		this.total_price = total_price;
+		this.quantity = quantity;
+		this.item_id = item_id;
+	}
+
+
+	public Order( Customer customer, long order_items_id, Double total_price, int quantity) {
+		
+		this.order_items_id = order_items_id;
+		this.total_price = total_price;
 		this.quantity = quantity;
 		this.customer = customer;
-		this.item = item;
 	}
 	
-	
+	public Order ( int item_id, int quantity) {
+		
+		this.item_id = item_id;
+		this.quantity = quantity;
+	}
 
-	public Order(long order_id, long order_items_id, int quantity) {
-		super();
+
+	public Order(Customer customer) {
+		this.customer = customer;
+	}
+	
+	public Order(long order_id, int item_id, int quantity ) {
 		this.order_id = order_id;
-		this.order_items_id = order_items_id;
+		this.item_id = item_id;
 		this.quantity = quantity;
 	}
 
 
 
-	public Item getItem() {
-		return item;
+	public int getItem_id() {
+		return item_id;
 	}
 
-	public void setItem(Item item) {
-		this.item = item;
+
+	public void setItem_id(int item_id) {
+		this.item_id = item_id;
 	}
 
+
+//	public Item getItem() {
+//		return item;
+//	}
+//
+//	public void setItem(Item item) {
+//		this.item = item;
+//	}
+//
 	public Customer getCustomer() {
 		return customer;
 	}
@@ -65,12 +124,14 @@ public class Order {
 	}
 
 
-	public Double getUnit_price() {
-		return unit_price;
+	public Double getTotal_price() {
+		
+		return total_price;
 	}
 
-	public void setUnit_price(Double unit_price) {
-		this.unit_price = unit_price;
+	public void setTotal_price(Double total_price) {
+		this.total_price = total_price;
+
 	}
 
 	public int getQuantity() {
@@ -80,6 +141,12 @@ public class Order {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
+	
+	@Override
+	public String toString() {
+		return "Order ID: " + order_id + "  Item id: " + item_id + "  Quantity: " + quantity + "  Total Price for Item: " + total_price;
+	}
+	
 
 	@Override
 	public boolean equals(Object obj) {
@@ -94,16 +161,19 @@ public class Order {
 			return false;
 		if (order_items_id != other.order_items_id)
 			return false;
+		if (item_id != other.item_id )
+			return false;
 		if (quantity != other.quantity)
 			return false;
 		if (customer != other.customer)
 			return false;
-		if (item != other.item)
-			return false;
-		if (unit_price == null) {
-			if (other.unit_price != null)
+//		if (item != other.item)
+//			return false;
+		if (total_price == null) {
+		if (other.total_price != null)
 				return false;
-		} else if (!unit_price.equals(other.unit_price))
+		
+		} else if (!total_price.equals(other.total_price))
 			return false;
 		return true;
 	}
