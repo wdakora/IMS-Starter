@@ -52,7 +52,7 @@ Here is a handy tutorial to create a fat.jar with maven [Here](http://tutorials.
 
 ## Running the tests
 
-![Testing Coverage](C:\Users\winni\OneDrive\Desktop\IMS-Starter\images\Coverage.png)
+![Testing Coverage](https://github.com/wdakora/IMS-Starter/blob/development/images/Coverage.PNG)
 
 To run this, right click on your project in eclipse and run covereage as a jUnit test
 The DAO tests will make sure the code written will actually work with my sql database
