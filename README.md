@@ -1,73 +1,112 @@
-Coverage: 34%
-# Project Title
+Coverage: 70%
+# Inventory Management System
 
-One Paragraph of project description goes here
+This is an Inventory Management System project used to create customers, items and orders. 
 
+Stored in an SQL database and coded in java
 
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
+Tools you will need:
 
-What things you need to install the software and how to install them
-
-```
-Give examples
-```
+ - Java jdk1.8.0_271 [Guide to installation](https://docs.oracle.com/en/java/javase/15/install/overview-jdk-installation.html#GUID-8677A77F-231A-40F7-98B9-1FD0B48C346A)
+ - Maven 
+ - MySQL Workbench
+ - IDE (integrated development environment) for using Java such as [Eclipse](https://www.oracle.com/java/technologies/javase-downloads.html) or [IntelliJ](https://www.jetbrains.com/idea/download/#section=windows)
 
 ### Installing
 
-A step by step series of examples that tell you how to get a development env running
 
-Say what the step will be
+**Java**
 
-```
-Give the example
-```
-
-And repeat
+Add these environment variables on your machine:
 
 ```
-until finished
-```
+- Variable name: JAVA_HOME
+- Variable Value: C:\Program Files\Java\jdk1.8.0_271
 
-End with an example of getting some data out of the system or using it for a little demo
+Append to PATH: %JAVA_HOME%\bin
+```
+**Maven**
+
+unzip apache-maven-3.6.3-bin.zip into your program files
+
+Add these environment variables on your machine: 
+```
+- Variable name: MAVEN_HOME
+- Variable Value: C:\Program Files\apache-maven-3.6.3\bin
+
+- Variable name: M2
+- Variable Value: C:\Program Files\apache-maven-3.6.3\bin
+
+Append to PATH: %MAVEN_HOME%\bin
+```
+**SQL** 
+[Guide to installing mySQL](https://dev.mysql.com/doc/mysql-installation-excerpt/5.7/en/)
+
+Jar file
+Here is a handy tutorial to create a fat.jar with maven [Here](http://tutorials.jenkov.com/maven/maven-build-fat-jar.html)
 
 ## Running the tests
 
-Explain how to run the automated tests for this system. Break down into which tests and what they do
+![Testing Coverage](C:\Users\winni\OneDrive\Desktop\IMS-Starter\images\Coverage.png)
+
+To run this, right click on your project in eclipse and run covereage as a jUnit test
+The DAO tests will make sure the code written will actually work with my sql database
+The Controller tests will check if the fake data I provide will run
 
 ### Unit Tests 
 
-Explain what these tests test, why and how to run them
+Unit testing is a testing approach that targets the very fundamental building blocks of an application, the idea is to prove that each 'unit' of the application is functioning as expected.
 
+The code below will test if it can create an item
 ```
-Give an example
+@Test
+	public void testCreate() {
+		final Item created = new Item(3L, "Milk", 2.99);
+		assertEquals(created, itemdao.create(created));
+	}
 ```
 
 ### Integration Tests 
-Explain what these tests test, why and how to run them
-
+Integration Testing is usually the next step after unit testing, once the functionality of the individual components is confirmed.
+The code below will test if this is correct
 ```
-Give an example
+	@Test
+	public void testCreate() {
+		String item_name = "bread" ;
+		Double price = 2.50;
+		Item itemCreate = new Item(item_name, price);
+		
+		when(utils.getString()).thenReturn(item_name);
+		when(utils.getDouble()).thenReturn(price);
+		when(itemdao.create(itemCreate)).thenReturn(itemCreate);
+		
+		assertEquals(itemCreate, controller.create());
+		
+		verify(utils,times(1)).getString();
+		verify(utils,times(1)).getDouble();
+		verify(itemdao,times(1)).create(itemCreate);
+	}
 ```
 
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+On command line (CMD) run this:
+
+```
+java -jar [YOUR PATH NAME]\ims-0.0.1-jar-with-dependencies.jar
+```
 
 ## Built With
 
 * [Maven](https://maven.apache.org/) - Dependency Management
+* Eclipse
+* mySQL
 
 ## Versioning
 
@@ -76,6 +115,7 @@ We use [SemVer](http://semver.org/) for versioning.
 ## Authors
 
 * **Chris Perrins** - *Initial work* - [christophperrins](https://github.com/christophperrins)
+* **Winifred Dakora** - *Finished work*
 
 ## License
 
@@ -85,6 +125,4 @@ This project is licensed under the MIT license - see the [LICENSE.md](LICENSE.md
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+- Aswene Sivaraj and Piers Barber for all the help recieved for this projects 
